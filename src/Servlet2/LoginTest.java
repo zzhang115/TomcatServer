@@ -1,5 +1,6 @@
 package Servlet2;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -14,6 +15,7 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import S.s;
 
 /**
  * Servlet implementation class LoginTest
@@ -23,7 +25,7 @@ public class LoginTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String loginMessage="";
 	private static final String velocity_path = "vms/LoginServlet.vm";
-
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,16 +39,19 @@ public class LoginTest extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		PrintWriter out=response.getWriter();
-		out.println("Hello");
-//		response.setContentType("text/html");
-//		response.setStatus(HttpServletResponse.SC_OK);
-//		try 
-//		{
-//			bodycontent(request, response, velocity_path);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		String path=this.getServletContext().getRealPath("/WEB-INF/vms/LoginServlet.vm");
+		String strDirPath = request.getServletPath();
+		String strPathFile = request.getSession().getServletContext().getRealPath(request.getRequestURI());
+		String strDirPath2 = new File(request.getSession().getServletContext().getRealPath(request.getRequestURI())).getParent();
+		s.sop(strDirPath2);
+		response.setContentType("text/html");
+		response.setStatus(HttpServletResponse.SC_OK);
+		try 
+		{
+			bodycontent(response, path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -58,6 +63,7 @@ public class LoginTest extends HttpServlet {
 //		response.setStatus(HttpServletResponse.SC_OK);
 //		response.flushBuffer();
 	}
+	
 	private void bodycontent(HttpServletResponse response, String Path) throws Exception 
 	{
 		VelocityEngine ve = new VelocityEngine();
