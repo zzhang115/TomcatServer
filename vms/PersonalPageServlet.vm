@@ -1,0 +1,114 @@
+##测试PersonalReviewServlet
+<form method="post">
+
+	<div class="container">
+	  <h1>TravelHelper</h1>
+	  <div align="right"<td><span class=pt5 link555><strong><a title=hotel $LoginLink>$LoginInfo</a></strong></span></td></div>
+	  <div align="right"<td><span class=pt5 link555><strong><a a title=hotel href="/signout">Log out</a></strong></span></td></div>
+	  <div align="left"<td><span class=pt5 link555><strong><a title=hotel href="/main">Main Page<br><br></a></strong></span></td></div>
+	</div>
+	
+	<div class="container">
+	  <button type="submit" name="MyReview" class="btn btn-primary active">MyReview</button>
+	  <button type="submit" name="SavedHotel" class="btn btn-primary active">SavedHotel</button>
+	</div>
+	
+	<div class="container">
+	  #if($personalPageMode==1)
+		  <table class="table table-hover">
+		    <thead>
+		      <tr>
+		        <th>HotelId</th>
+		        <th>Username</th>
+		        <th>Rating</th>
+		        <th>IsRecomand</th>
+		        <th>ReviewTitle</th>
+		        <th>ReviewText</th>
+		        <th>ReviewDate</th>
+		        <th>Modify</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    
+		      #foreach($ordernum in $ReviewMap.keySet())
+		      <tr>
+		          <td><div>$ReviewMap.get($ordernum).hotelid</div></td>
+		          <td><div>$ReviewMap.get($ordernum).username</div></td>
+		          #if($ModifyMap.get($ordernum) == "Modify")
+			          <td><div>$ReviewMap.get($ordernum).rating</div></td>
+			          <td><div>$ReviewMap.get($ordernum).ifRecomand</div></td>
+			          <td width="164"><div>$ReviewMap.get($ordernum).reviewtitle</div></td>
+			          <td><div>$ReviewMap.get($ordernum).reviewtext</div></td>
+			      #else   
+			          <td><div class="form-group">
+				      <label for="usr">Rating:</label>
+				      <input type="text" name="rating" class="form-control" id="usr" value="$ReviewMap.get($ordernum).rating">
+				      </div></td>
+				      
+				      <td><div class="form-group">
+				      <label for="pwd">isRecomand:</label>
+				      <input type="text" name="isRecomand" class="form-control" id="pwd" value="$ReviewMap.get($ordernum).ifRecomand">
+				      </div></td>
+				      
+				      <td><div class="form-group">
+				      <label for="pwd">reviewTitle:</label>
+				      <input type="text" name="reviewTitle" class="form-control" id="pwd" value="$ReviewMap.get($ordernum).reviewtitle">
+				      </div></td>
+					  
+					  <td><div class="form-group">
+					  <label for="comment">reviewText:</label>
+					  <textarea name="reviewText" class="form-control" rows="5" id="comment" value="$ReviewMap.get($ordernum).reviewtext">$ReviewMap.get($ordernum).reviewtext</textarea>
+					  </div></td>
+			      #end  
+			      <td><div>$ReviewMap.get($ordernum).date</div></td>
+			      <td><div class="form-group">
+		          <button type="submit" name="Modifyordernum$ordernum" class="btn btn-primary active">$ModifyMap.get($ordernum)</button>
+		  		  <button type="submit" name="Deleteordernum$ordernum" class="btn btn-primary active">Delete</button>
+		          </div></td>
+		   	  </tr>
+		      #end
+		    </tbody>
+		  </table>
+		#else
+		  <table class="table table-hover">
+		    <thead>
+		      <tr>
+		        <th>Picture</th>
+		        <th>Name & Link to Expedia</th>
+		        <th>Average rating</th>
+		        <th>Street</th>
+		        <th>City</th>
+		        <th>State</th>
+		        <th>Country</th>
+		        <th>Modify</th>
+		         <td><div class="form-group">
+		  		  <button type="submit" name="ClearAll" class="btn btn-primary active">ClearAll</button>
+		          </div></td>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    
+		      #foreach($ordernum in $HotelMap.keySet())
+		      <tr>
+			      <td>
+			         <div>
+				         <a href="/review" target="_blank"></a><a href="/review?hotelId=$HotelMap.get($ordernum).id&page=1" target="_blank"><img method="bigImg" data-mark="img_50101091" 
+						    src="http://pavo.elongstatic.com/i/Hotel180_135/0000coiL.jpg" data-src="http://pavo.elongstatic.com/i/Hotel480_350/0000coiL.jpg" alt="" width="150" height="100" /></a>
+					</div>
+				  </td>
+		          <td><div>$HotelMap.get($ordernum).name</div><br><a title="hotel" href='https://www.expedia.com/${HotelMap.get($ordernum).name}.h${HotelMap.get($ordernum).id}.Hotel-Information'>Link to Expedia</a></td>
+		          <td><div>$HotelMap.get($ordernum).rating</div></td>
+		          <td><div>$HotelMap.get($ordernum).street</div></td>
+		          <td><div>$HotelMap.get($ordernum).city</div></td>
+		          <td><div>$HotelMap.get($ordernum).state</div></td>
+		          <td><div>$HotelMap.get($ordernum).country</div></td>
+			      <td><div class="form-group">
+		          <button type="submit" name="Delete$ordernum" class="btn btn-primary active">Delete</button>
+		          </div></td>
+		   	  </tr>
+		      #end
+		    </tbody>
+		  </table>
+	   #end
+	
+</form>%n              

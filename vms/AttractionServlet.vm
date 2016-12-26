@@ -1,0 +1,35 @@
+##test
+<form method="post">
+	
+	<div class="container">
+	  <h1>TravelHelper</h1>
+	  <div align="right"<td><span class=pt5 link555><strong><a title=hotel $LoginLink>$LoginInfo</a></strong></span></td></div>
+	  <div align="right"<td><span class=pt5 link555><strong><a a title=hotel href="/signout">Log out</a></strong></span></td></div>
+	  <div align="left"<td><span class=pt5 link555><strong><a title=hotel href="/main">Main Page</a></strong></span></td></div>
+	</div>
+	
+	<div class="container">
+	  <h2>Attractions near this hotel</h2>
+	  <table class="table table-hover">
+	    <thead>
+	      <tr>
+	        <th>HotelId</th>
+	        <th>AttractionId</th>
+	        <th>AttractionName</th>
+	        <th>FormattedAddress</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	    
+	      #foreach($ordernum in $$AttractionMap.keySet())
+	      <tr>
+	          <td><div>$hotelId</div></td>
+	          <td><div>$AttractionMap.get($ordernum).attractionId</div></td>
+	          <td><div>$AttractionMap.get($ordernum).name</div></td>
+	          <td width="164"><div>$AttractionMap.get($ordernum).address</div></td>
+	   	  </tr>
+	      #end
+	    </tbody>
+	  </table>
+	</div>
+	</form>%n
